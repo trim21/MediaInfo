@@ -1,0 +1,16 @@
+version: 3
+
+tasks:
+  build:
+    env:
+      CXX: clang-cl
+    cmds:
+      - rm build -rf
+      - |
+        cmake ./Project/CMake/CLI/ \
+        -B build \
+        -D CMAKE_PREFIX_PATH=./.pixi/envs/default/ \
+        -D CMAKE_INSTALL_PREFIX=./.pixi/envs/default/Library \
+        -D 'CMAKE_PROGRAM_PATH=${CONDA_PREFIX}/bin;${CONDA_PREFIX}/Scripts;${CONDA_PREFIX}/Library/bin;${CONDA_PREFIX}/bin;${CONDA_PREFIX}/Library/bin' \
+        -G Ninja
+      - ninja -C build
